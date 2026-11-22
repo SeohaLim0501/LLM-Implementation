@@ -30,18 +30,28 @@ def batches():
                 yield torch.tensor(batch, device=device)
                 batch = []
 
+
 total_loss = 0
 count = 0
 
+print("Validation started!", flush=True)
+
 with torch.no_grad():
-    for batch in islice(batches(), 100):
+    for batch in islice(batches(), 500):
         logits = model(batch[:, :-1])
-        loss = F.cross_entropy(logits.reshape(-1, logits.size(-1)), batch[:, 1:].reshape(-1))
+        loss = F.cross_entropy(
+            logits.reshape(-1, logits.size(-1)),
+            batch[:, 1:].reshape(-1)
+        )
 
         total_loss += loss.item()
         count += 1
 
+        if count % 10 == 0:
+            print(f"Batch {count}/100 | Avg Loss: {total_loss/count:.4f}", flush=True)
+
 avg_loss = total_loss / count
 
-print("Validation Loss:", avg_loss)
-print("Perplexity:", torch.exp(torch.tensor(avg_loss)).item())
+print("Validation completed!")
+print(f"Validation Loss: {avg_loss:.4f}")
+print(f"Perplexity: {torch.exp(torch.tensor(avg_loss)).item():.4f}")
