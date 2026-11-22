@@ -22,7 +22,7 @@ tokenizer.decoder = ByteLevelDecoder()
 special_tokens = [
     "<pad>", "<unk>", "<bos>", "<eos>",
     "<sep>", "<system>", "<user>", "<assistant>",
-    "<bot>", "<eot>"
+    "<bot>", "<eot>", "<mask>"
 ]
 
 trainer = BpeTrainer(

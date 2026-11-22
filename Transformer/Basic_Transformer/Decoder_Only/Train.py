@@ -6,7 +6,6 @@ from Decoder import Decoder
 
 tokenizer = Tokenizer.from_file("Transformer/tokenizer/tokenizer.json")
 dataset = load_dataset("roneneldan/TinyStories", split="train", streaming=True)
-
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print("Device:", device)
 if device == "cuda": print(torch.cuda.get_device_name(0))
