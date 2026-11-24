@@ -130,9 +130,9 @@ for step, x in enumerate(batches(), 1):
         print(f"Step {step}: Loss = {loss.item():.4f}")
 
     if step % 1000 == 0:
-        torch.save(model.state_dict(), "encoder.pt")
+        torch.save(model.state_dict(), "Transformer/Basic_Transformer/Encoder_Only/encoder.pt")
 
     if step == STEPS:
         break
 
-torch.save(model.state_dict(), "encoder.pt")
+torch.save(model.state_dict(), "Transformer/Basic_Transformer/Encoder_Only/encoder.pt")
