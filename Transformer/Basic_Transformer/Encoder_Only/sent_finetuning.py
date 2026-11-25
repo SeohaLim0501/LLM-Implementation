@@ -8,7 +8,7 @@ from Encoder import EncoderOnlyTransformer
 import torch.nn.functional as F
 
 ROOT = Path(__file__).resolve().parents[3]
-dataset_name = (ROOT / "Data" / "Transformer_FT.txt").read_text(encoding="utf-8").strip()
+dataset_name = (ROOT / "Data" / "Transformer_sentiment.txt").read_text(encoding="utf-8").strip()
 dataset = load_dataset(dataset_name, split="train", streaming=True)
 
 def preprocess(row):
@@ -17,7 +17,7 @@ def preprocess(row):
     return {"text": text, "label": label}
 
 dataset = dataset.map(preprocess)
-tokenizer = Tokenizer.from_file(str(ROOT / "Transformer" / "Basic_Transformer" / "tokenizer" / "tokenizer.json"))
+tokenizer = Tokenizer.from_file(str(ROOT / "Transformer" / "tokenizer" / "tokenizer.json"))
 pad_id = tokenizer.token_to_id("<pad>")
 bos_id = tokenizer.token_to_id("<bos>")
 
