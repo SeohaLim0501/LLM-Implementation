@@ -3,9 +3,13 @@ import torch.nn.functional as F
 from tokenizers import Tokenizer
 from datasets import load_dataset
 from Decoder import Decoder
+from pathlib import Path
+from itertools import islice
 
 tokenizer = Tokenizer.from_file("Transformer/tokenizer/tokenizer.json")
-dataset = load_dataset("roneneldan/TinyStories", split="train", streaming=True)
+ROOT = Path(__file__).resolve().parents[3]
+dataset_name = (ROOT / "Data" / "Transformer.txt").read_text(encoding="utf-8").strip()
+dataset = load_dataset(dataset_name, split="train", streaming=True)
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print("Device:", device)
 if device == "cuda": print(torch.cuda.get_device_name(0))

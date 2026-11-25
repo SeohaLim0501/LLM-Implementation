@@ -8,11 +8,9 @@ from tokenizers.processors import TemplateProcessing
 from datasets import load_dataset
 from itertools import islice
 
-dataset = load_dataset(
-    "roneneldan/TinyStories",
-    split="train",
-    streaming=True
-)
+ROOT = Path(__file__).resolve().parents[3]
+dataset_name = (ROOT / "Data" / "Transformer.txt").read_text(encoding="utf-8").strip()
+dataset = load_dataset(dataset_name, split="train", streaming=True)
 texts = (row["text"] for row in islice(dataset, 300000))
 
 tokenizer = Tokenizer(BPE(unk_token="<unk>"))

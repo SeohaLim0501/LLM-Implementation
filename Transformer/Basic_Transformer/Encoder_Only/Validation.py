@@ -9,8 +9,9 @@ from Encoder import EncoderOnlyTransformer
 ROOT = Path(__file__).resolve().parents[1]
 
 tokenizer = Tokenizer.from_file("Transformer/tokenizer/tokenizer.json")
-dataset = load_dataset("roneneldan/TinyStories", split="validation", streaming=True)
-
+ROOT1 = Path(__file__).resolve().parents[3]
+dataset_name = (ROOT1 / "Data" / "Transformer.txt").read_text(encoding="utf-8").strip()
+dataset = load_dataset(dataset_name, split="train", streaming=True)
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model = EncoderOnlyTransformer(tokenizer.get_vocab_size(), num_layers=8).to(device)
 model.load_state_dict(torch.load(ROOT / "Encoder_Only" / "encoder.pt", map_location=device, weights_only=True))
