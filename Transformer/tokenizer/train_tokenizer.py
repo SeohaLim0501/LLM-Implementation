@@ -8,7 +8,7 @@ from tokenizers.processors import TemplateProcessing
 from datasets import load_dataset
 from itertools import islice
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[2]
 dataset_name = (ROOT / "Data" / "Transformer.txt").read_text(encoding="utf-8").strip()
 dataset = load_dataset(dataset_name, split="train", streaming=True)
 texts = (row["text"] for row in islice(dataset, 300000))

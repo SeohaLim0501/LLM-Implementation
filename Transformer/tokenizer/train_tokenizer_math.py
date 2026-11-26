@@ -8,7 +8,7 @@ from tokenizers.processors import TemplateProcessing
 from datasets import load_dataset
 from itertools import islice
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[2]
 
 dataset_name, config_name = (
     ROOT / "Data" / "Transformer_EnD_MATH.txt"
